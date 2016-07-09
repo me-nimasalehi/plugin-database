@@ -51,18 +51,23 @@ if( !function_exists("extra_post_info_page") )
 {
 function extra_post_info_page(){
 ?>
-  <h1>WordPress Extra Post Info</h1>
+
+  <h1>Add any kind of html tags in head .</h1>
   <form method="post" action="options.php">
     <?php settings_fields( 'extra-post-info-settings' ); ?>
     <?php do_settings_sections( 'extra-post-info-settings' ); ?>
     <table class="form-table">
       <tr valign="top">
       <th scope="row">Extra post info:</th>
-      <td><input type="text" name="extra_post_info" value="<?php echo get_option('extra_post_info'); ?>"/></td>
+      <td><input style="width: 900px;" type="text" name="extra_post_info" value="<?php echo get_option('extra_post_info'); ?>"/></td>
       </tr>
     </table>
   <?php submit_button(); ?>
   </form>
+  <p>You can verify your ownership of a site by adding a <meta> tag to the HTML of a specified page. We'll verify that the meta tag exists in the correct location. If we can't find the tag, we'll give you information about the error we encountered. This tag is tied to a specific user.
+
+To verify ownership with an HTML tag, choose the HTML tag method on the verification details page for your site and follow the instructions shown.
+  </p>
 <?php
 }
 }
@@ -70,15 +75,22 @@ function extra_post_info_page(){
 // Plugin logic for adding extra info to posts
 if( !function_exists("extra_post_info") )
 {
-  function extra_post_info()
+  function extra_post_info($content)
   {
     $extra_info = get_option('extra_post_info');
-    // return $content . $extra_info;
-    echo $extra_info;
+    return $content . $extra_info;
   }
 }
 
 // Apply the extra_post_info function on our content
 // add_filter('the_content', 'extra_post_info');
 
-add_action('wp_head','extra_post_info');
+add_action('wp_head','hook_css');
+
+function hook_css() {
+
+	$output='extra_post_info';
+
+	echo $output;
+
+}
