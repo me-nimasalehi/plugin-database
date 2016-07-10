@@ -59,15 +59,15 @@ function extra_post_info_page(){
     <table class="form-table">
       <tr valign="top">
       <th scope="row">Extra post info:</th>
-      <td><input style="width: 900px;" type="text" name="extra_post_info" value="<?php echo get_option('extra_post_info'); ?>"/></td>
+      <!-- <td><input style="width: 900px;" type="text" name="extra_post_info" value="<?php //echo get_option('extra_post_info'); ?>"/></td> -->
+
       </tr>
+      <tr><td><textarea rows="15" cols="150"  name="extra_post_info" ><?php echo esc_attr( get_option('extra_post_info') ); ?></textarea></td></tr>
+
     </table>
   <?php submit_button(); ?>
   </form>
-  <p>You can verify your ownership of a site by adding a <meta> tag to the HTML of a specified page. We'll verify that the meta tag exists in the correct location. If we can't find the tag, we'll give you information about the error we encountered. This tag is tied to a specific user.
-
-To verify ownership with an HTML tag, choose the HTML tag method on the verification details page for your site and follow the instructions shown.
-  </p>
+  <p>You can verify your ownership of a site by adding a <meta> tag to the HTML of a specified page.</p>
 <?php
 }
 }
