@@ -20,7 +20,7 @@ function ns_html_head_tags(){
   $menu_title = 'HTML HEAD TAGS';
   $capability = 'manage_options';
   $menu_slug  = 'ns_html_head_tags';
-  $function   = 'extra_post_info_page';
+  $function   = 'html_head_tags_page';
   $icon_url   = 'dashicons-media-code';
   $position   = 4;
 
@@ -47,9 +47,9 @@ function ns_update_html_head_tags() {
 }
 
 // Create WordPress plugin page
-if( !function_exists("extra_post_info_page") )
+if( !function_exists("html_head_tags_page") )
 {
-function extra_post_info_page(){
+function html_head_tags_page(){
 ?>
 
   <h1>Add HTML HEAD TAGS.</h1>
