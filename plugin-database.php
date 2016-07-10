@@ -1,25 +1,25 @@
 <?php
 /*
-Plugin name: WordPress Extra Post Info
-Plugin URI: http://example.com/wordpress-extra-post-info
-Description: A simple plugin to add extra info to posts.
-Author: Jacob Nicholson
-Author URI: http://InMotionHosting.com
-Version: 0.5
+Plugin name: HTML HEAD TAGS
+Plugin URI: nimasalehi.com/ns-html-head-tags
+Description: A simple plugin to add CSS, JS, META, ... to HEAD of HTML.
+Author: Nima Salehi
+Author URI: nimasalehi.com
+Version: 0.1
 */
 
-// Call extra_post_info_menu function to load plugin menu in dashboard
-add_action( 'admin_menu', 'extra_post_info_menu' );
+// Call ns-html-head-tags function to load plugin menu in dashboard
+add_action( 'admin_menu', 'ns_html_head_tags' );
 
 // Create WordPress admin menu
-if( !function_exists("extra_post_info_menu") )
+if( !function_exists("ns_html_head_tags") )
 {
-function extra_post_info_menu(){
+function ns_html_head_tags(){
 
-  $page_title = 'WordPress Extra Post Info';
-  $menu_title = 'Extra Post Info';
+  $page_title = 'HTML HEAD TAGS';
+  $menu_title = 'HTML HEAD TAGS';
   $capability = 'manage_options';
-  $menu_slug  = 'extra-post-info';
+  $menu_slug  = 'ns_html_head_tags';
   $function   = 'extra_post_info_page';
   $icon_url   = 'dashicons-media-code';
   $position   = 4;
@@ -32,17 +32,17 @@ function extra_post_info_menu(){
                  $icon_url,
                  $position );
 
-  // Call update_extra_post_info function to update database
-  add_action( 'admin_init', 'update_extra_post_info' );
+  // Call ns_update_html_head_tags function to update database
+  add_action( 'admin_init', 'ns_update_html_head_tags' );
 
 }
 }
 
 // Create function to register plugin settings in the database
-if( !function_exists("update_extra_post_info") )
+if( !function_exists("ns_update_html_head_tags") )
 {
-function update_extra_post_info() {
-  register_setting( 'extra-post-info-settings', 'extra_post_info' );
+function ns_update_html_head_tags() {
+  register_setting( 'ns_html_head_tags_settings', 'html_head_tags' );
 }
 }
 
@@ -52,45 +52,32 @@ if( !function_exists("extra_post_info_page") )
 function extra_post_info_page(){
 ?>
 
-  <h1>Add any kind of html tags in head .</h1>
+  <h1>Add HTML HEAD TAGS.</h1>
   <form method="post" action="options.php">
-    <?php settings_fields( 'extra-post-info-settings' ); ?>
-    <?php do_settings_sections( 'extra-post-info-settings' ); ?>
+    <?php settings_fields( 'ns_html_head_tags_settings' ); ?>
+    <?php do_settings_sections( 'ns_html_head_tags_settings' ); ?>
     <table class="form-table">
       <tr valign="top">
-      <th scope="row">Extra post info:</th>
-      <!-- <td><input style="width: 900px;" type="text" name="extra_post_info" value="<?php //echo get_option('extra_post_info'); ?>"/></td> -->
-
+      <th scope="row">HTML HEAD TAGS:</th>
       </tr>
-      <tr><td><textarea rows="15" cols="150"  name="extra_post_info" ><?php echo esc_attr( get_option('extra_post_info') ); ?></textarea></td></tr>
-
+      <tr><td><textarea rows="15" cols="100"  name="html_head_tags" >
+        <?php echo esc_attr( get_option('html_head_tags') ); ?>
+      </textarea></td></tr>
     </table>
   <?php submit_button(); ?>
+
   </form>
-  <p>You can verify your ownership of a site by adding a <meta> tag to the HTML of a specified page.</p>
+  <p>
+  Description: A simple plugin to add CSS, JS, META, ... to HEAD of HTML.<br>
+  Author: Nima Salehi |
+  Author URI: nimasalehi.com
+  </p>
 <?php
 }
 }
 
-// Plugin logic for adding extra info to posts
-if( !function_exists("extra_post_info") )
-{
-  function extra_post_info($content)
-  {
-    $extra_info = get_option('extra_post_info');
-    return $content . $extra_info;
-  }
-}
-
-// Apply the extra_post_info function on our content
-// add_filter('the_content', 'extra_post_info');
-
 add_action('wp_head','hook_css');
-
-function hook_css() {
-
-	$output='extra_post_info';
-
-	echo $output;
-
+function hook_css()
+{
+  echo (get_option('html_head_tags'));
 }
