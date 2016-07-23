@@ -1,0 +1,5 @@
+How to add a plugin:
+https://wordpress.org/plugins/about/#readme
+
+Link to add your plugin into WordPress:
+https://wordpress.org/plugins/add/
